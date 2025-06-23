@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"net/http"
 	"time"
@@ -10,6 +11,11 @@ import (
 
 func main() {
 
+	var port int
+
+	flag.IntVar(&port, "port", 8080, "Go backend server port")
+	flag.Parse()
+
 	app, err := app.NewApplication()
 	if err != nil {
 		panic(err)
@@ -18,7 +24,7 @@ func main() {
 	app.Logger.Println("We are running our appliction")
 
 	server := &http.Server{
-		Addr:         ":8080",
+		Addr:         fmt.Sprintf(":%d", port),
 		IdleTimeout:  time.Minute,
 		ReadTimeout:  10 * time.Second,
 		WriteTimeout: 30 * time.Second,
