@@ -22,6 +22,8 @@ func main() {
 		panic(err)
 	}
 
+	defer app.DB.Close()
+
 	app.Logger.Println("We are running our appliction on port", port)
 
 	r := routes.SetupRoutes(app)
