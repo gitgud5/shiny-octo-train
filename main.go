@@ -22,7 +22,7 @@ func main() {
 		panic(err)
 	}
 
-	app.Logger.Println("We are running our appliction")
+	app.Logger.Println("We are running our appliction on port", port)
 
 	r := routes.SetupRoutes(app)
 
