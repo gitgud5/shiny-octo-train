@@ -19,7 +19,6 @@ type Application struct {
 }
 
 func NewApplication() (*Application, error) {
-
 	pgDB, err := store.Open()
 	if err != nil {
 		return nil, err
@@ -32,10 +31,11 @@ func NewApplication() (*Application, error) {
 
 	logger := log.New(os.Stdout, "", log.Ldate|log.Ltime)
 
-	// Our stores will go here
+	// our stores will go here
+	workoutStore := store.NewPostgresWorkoutStore(pgDB)
 
-	// Our handlers will go here
-	workoutHandler := api.NewWorkoutHandler()
+	// our handlers will go here
+	workoutHandler := api.NewWorkoutHandler(workoutStore)
 
 	app := &Application{
 		Logger:         logger,
@@ -44,9 +44,8 @@ func NewApplication() (*Application, error) {
 	}
 
 	return app, nil
-
 }
 
 func (a *Application) HealthCheck(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Status is available")
+	fmt.Fprintf(w, "Status is available\n")
 }
