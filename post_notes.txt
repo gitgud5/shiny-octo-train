@@ -151,12 +151,14 @@ curl -X POST http://localhost:8080/tokens/authentication \
     "password": "securepassword123"
 }'
 
+
+
 3.5:
 curl -X POST "http://localhost:8080/users" \
      -H "Content-Type: application/json" \
      -d '{
-          "username": "johndoe",
-          "email": "johndoe@example.com",
+          "username": "melkey",
+          "email": "melkey@example.com",
           "password": "SecureP@ssword123",
           "bio": "Fitness enthusiast and software developer"
         }'
